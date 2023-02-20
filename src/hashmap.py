@@ -3,6 +3,8 @@ from dynamic_array import DynamicArray
 
 INIT_CAPACITY = 11
 LOAD_FACTOR_BOUNDARY = 0.75
+KEY = 0
+VALUE = 1
 
 def hash_function(key: str) -> int:
     hash = 0
@@ -50,8 +52,8 @@ class HashMap:
             bucket.append([key, value])
         else:
             for value_ in bucket:
-                if value_[0] == key:
-                    value_[1] = value
+                if value_[KEY] == key:
+                    value_[VALUE] = value
                     return
             
             bucket.append((key, value))
@@ -70,7 +72,7 @@ class HashMap:
             position = 0
 
             for value in self._buckets[index]:
-                if value[0] == key:
+                if value[KEY] == key:
                     self._buckets[index].erase(position)
                 position += 1
             
@@ -88,14 +90,14 @@ class HashMap:
         for i in range(self._capacity):
             bucket = self._buckets[i]
             for chain in bucket:
-                keys.append([chain[0], chain[1]])
+                keys.append([chain[KEY], chain[VALUE]])
 
         self._buckets = new_storage
         self._capacity = new_capacity
         self._size = 0
 
-        for tup in keys:
-            self.insert(tup[0], tup[1])
+        for item in keys:
+            self.insert(item[KEY], item[VALUE])
 
     @staticmethod
     def _is_prime(capacity) -> bool:
