@@ -1,5 +1,4 @@
 ## HashMap
-Hash table based implementation of the Map interface
 
 ### Реализация ассоциативнного контейнера Map на основе Hash Table  
 Хеш-табли́ца — это структура данных, реализующая интерфейс ассоциативного  
