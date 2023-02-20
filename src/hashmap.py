@@ -1,5 +1,6 @@
 from linkedlist import LinkedList
 from dynamic_array import DynamicArray
+from typing import Any
 
 INIT_CAPACITY = 11
 LOAD_FACTOR_BOUNDARY = 0.75
@@ -34,13 +35,13 @@ class HashMap:
     def __len__(self) -> int:
         return self._size
 
-    def get_item(self, key):
+    def get_item(self, key) -> Any:
         index = (self._hash_function(key)) % self._capacity
 
         if self._buckets[index].contains(key) is not None:
             return self._buckets[index].contains(key)
 
-    def insert(self, key, value) -> None:
+    def insert(self, key: Any, value: Any) -> None:
         index = (self._hash_function(key)) % self._capacity
         bucket = self._buckets[index]
 
@@ -60,12 +61,12 @@ class HashMap:
 
         self._size += 1
     
-    def contains_key(self, key) -> bool:
+    def contains_key(self, key: Any) -> bool:
         index = (self._hash_function(key)) % self._capacity
 
         return False if len(self._buckets[index]) == 0 else True
     
-    def remove(self, key) -> None:
+    def remove(self, key: Any) -> None:
         index = (self._hash_function(key)) % self._capacity
         
         if self.contains_key(key):
@@ -78,7 +79,7 @@ class HashMap:
             
             self._size -= 1
     
-    def _resize_table(self, new_capacity) -> None:
+    def _resize_table(self, new_capacity: int) -> None:
         if not self._is_prime(new_capacity):
             new_capacity = self._next_prime(new_capacity)
 
@@ -100,7 +101,7 @@ class HashMap:
             self.insert(item[KEY], item[VALUE])
 
     @staticmethod
-    def _is_prime(capacity) -> bool:
+    def _is_prime(capacity: int) -> bool:
         if not isinstance(capacity, int):
             raise TypeError("It's impossible to check primary of non-integer arguments")
 
@@ -117,7 +118,7 @@ class HashMap:
         
         return True
 
-    def _next_prime(self, capacity) -> int:
+    def _next_prime(self, capacity: int) -> int:
         if capacity % 2 == 0:
             capacity += 1
         
@@ -130,7 +131,7 @@ class HashMap:
         bucket = self._buckets
 
         for i in range(self._capacity):
-            bucket[i] = LinkedList()
+            bucket[i].clear()
         
         self._size = 0
 
