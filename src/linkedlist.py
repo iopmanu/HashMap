@@ -35,9 +35,6 @@ class LinkedList:
     tail:    Node = None
     size:    int  = 0
 
-    def get_size(self):
-        return self.size
-
     def append(self, src):
         src_node = Node(src, None, self.tail)
         if self.size != 0:
@@ -129,3 +126,12 @@ class LinkedList:
         while current is not None:
             yield current.value
             current = current.next
+
+    def __reversed__(self):
+        current = self.tail
+        while current is not None:
+            yield current.value
+            current = current.prev
+
+    def __len__(self):
+        return self.size
