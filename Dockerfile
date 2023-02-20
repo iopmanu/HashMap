@@ -14,4 +14,4 @@ COPY . /project
 
 WORKDIR "/project"
 
-CMD pytest -s -v linked_list_tests.py
+CMD pytest -s -v hashmap_tests.py linked_list_tests.py
