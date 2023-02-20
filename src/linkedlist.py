@@ -108,18 +108,33 @@ class LinkedList:
     def pop_last(self):
         if self.size == 0:
             raise IndexError("Empty list")
+        elif self.size == 1:
+            self.head = None
+            self.tail = None
+        else:    
+            self.tail = self.tail.prev
+            self.tail.next = None
 
-        self.tail = self.tail.prev
-        self.tail.next = None
         self.size -= 1
     
     def pop_first(self):
         if self.size == 0:
             raise IndexError("Empty list")
-
-        self.head = self.head.next
-        self.head.prev = None
+        elif self.size == 1:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            
         self.size -= 1
+
+    def contains(self, key) -> None:
+        for value in self:
+            if value[0] == key:
+                return value[1]
+        
+        return None
 
     def __iter__(self):
         current = self.head
