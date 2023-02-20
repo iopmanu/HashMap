@@ -7,6 +7,28 @@ class Node:
     next:  object = None
     prev:  object = None
 
+    def __add__(self, value):
+        self.next = Node(value)
+
+    def __str__(self):
+        return 'node(' + str(self.value) + ')'
+
+    def __iter__(self):
+        return LinkedListIter(self)
+
+class LinkedListIter():
+    def __init__(self, item) -> None:
+        self._item = item
+    
+    __iter__ = lambda self:self
+
+    def __next__(self):
+        if self._item is None:
+            raise StopIteration
+        
+        item, self._item = self._item, self._item.next
+        return item
+
 @dataclass
 class LinkedList:
     head:    Node = None
@@ -26,6 +48,24 @@ class LinkedList:
             self.tail = src_node
         
         self.size += 1
+
+    def insert(self, value, before=None, after=None):
+        if after is not None:
+            if before is not None:
+                raise ValueError('Impossible to insert between 2 nodes')
+            before = after.next
+        
+        if before is None:
+            return self.append(value)
+        
+        if not isinstance(before, Node):
+            raise TypeError('Type of var before&after must be Node')
+
+        node = Node(value, before, before.prev)
+        before.prev.next = node
+        before.prev = node
+        self.size += 1
+        
 
     def prepend(self, src):
         src_node = Node(src, self.head, None)
@@ -83,3 +123,9 @@ class LinkedList:
         self.head = self.head.next
         self.head.prev = None
         self.size -= 1
+
+    def __iter__(self):
+        current = self.head
+        while current is not None:
+            yield current.value
+            current = current.next
