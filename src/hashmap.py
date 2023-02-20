@@ -1,6 +1,9 @@
 from linkedlist import LinkedList
 from dynamic_array import DynamicArray
 
+INIT_CAPACITY = 11
+LOAD_FACTOR_BOUNDARY = 0.75
+
 def hash_function(key: str) -> int:
     hash = 0
     for symbol, index in zip(key, range(len(key))):
@@ -8,7 +11,7 @@ def hash_function(key: str) -> int:
     return hash
 
 class HashMap:
-    def __init__(self, capacity=11, hf=hash_function) -> None:
+    def __init__(self, capacity=INIT_CAPACITY, hf=hash_function) -> None:
         if not isinstance(capacity, int) or capacity <= 0:
             raise TypeError("Size must be a positive number")
                 
@@ -34,6 +37,9 @@ class HashMap:
 
     @staticmethod
     def _is_prime(capacity) -> bool:
+        if not isinstance(capacity, int):
+            raise TypeError("It's impossible to check primary of non-integer arguments")
+
         if capacity == 2 or capacity == 3:
             return True
         elif capacity == 1 or capacity % 2 == 0:
@@ -53,18 +59,35 @@ class HashMap:
         
         while not self._is_prime(capacity):
             capacity += 2
-            print(self._is_prime(capacity))
 
         return capacity
 
+    def clear(self) -> None:
+        bucket = self._buckets
+
+        for i in range(self._capacity):
+            bucket[i] = LinkedList()
+        
+        self._size = 0
+
     @property
-    def get_size(self):
+    def get_size(self) -> int:
         return self._size
 
     @property
-    def get_capacity(self):
+    def get_capacity(self) -> int:
         return self._capacity
     
     @property
-    def load_factor(self):
+    def load_factor(self) -> float:
         return self._size / self._capacity
+
+    @property
+    def empty_buckets_counts(self) -> int:
+        result, bucket = 0, self._buckets
+
+        for i in range(self._capacity):
+            if len(bucket[i]) == 0:
+                result += 1
+            
+        return result
