@@ -120,11 +120,11 @@ class HashMap:
         return True
 
     @classmethod
-    def _next_prime(self, capacity: int) -> int:
+    def _next_prime(cls, capacity: int) -> int:
         if capacity % 2 == 0:
             capacity += 1
         
-        while not self._is_prime(capacity):
+        while not cls._is_prime(capacity):
             capacity += 2
 
         return capacity
