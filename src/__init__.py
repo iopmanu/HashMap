@@ -1,6 +1,8 @@
 from .linkedlist import *
+from .dynamic_array import *
 
 __all__ = [
     'LinkedList',
-    'Node'
+    'Node',
+    'DynamicArray'
 ]
