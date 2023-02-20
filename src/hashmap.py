@@ -52,9 +52,9 @@ class HashMap:
         elif len(bucket) == 0:
             bucket.append([key, value])
         else:
-            for value_ in bucket:
-                if value_[KEY] == key:
-                    value_[VALUE] = value
+            for pair in bucket:
+                if pair[KEY] == key:
+                    pair[VALUE] = value
                     return
             
             bucket.append((key, value))
