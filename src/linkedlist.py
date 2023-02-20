@@ -1,13 +1,16 @@
 from dataclasses import dataclass
 from typing import Any
 
+KEY = 0
+VALUE = 1
+
 @dataclass
 class Node:
     value: Any
     next:  object = None
     prev:  object = None
 
-    def __add__(self, value : Any):
+    def __add__(self, value: Any):
         self.next = Node(value)
 
     def __str__(self) -> str:
@@ -17,7 +20,7 @@ class Node:
         return LinkedListIter(self)
 
 class LinkedListIter():
-    def __init__(self, item) -> None:
+    def __init__(self, item: Node) -> None:
         self._item = item
     
     __iter__ = lambda self:self
@@ -35,7 +38,7 @@ class LinkedList:
     tail:    Node = None
     size:    int  = 0
 
-    def append(self, src):
+    def append(self, src: Any):
         src_node = Node(src, None, self.tail)
         if self.size != 0:
             self.tail.next = src_node
@@ -46,7 +49,7 @@ class LinkedList:
         
         self.size += 1
 
-    def insert(self, value : Any, before=None, after=None) -> None:
+    def insert(self, value: Any, before=None, after=None) -> None:
         if after is not None:
             if before is not None:
                 raise ValueError('Impossible to insert between 2 nodes')
@@ -64,7 +67,7 @@ class LinkedList:
         self.size += 1
         
 
-    def prepend(self, src : Any) -> None:
+    def prepend(self, src: Any) -> None:
         src_node = Node(src, self.head, None)
         if (self.size != 0):
             self.head.prev = src_node
@@ -75,7 +78,7 @@ class LinkedList:
         
         self.size += 1
 
-    def erase(self, index : int) -> None:
+    def erase(self, index: int) -> None:
         if index >= self.size or index < 0:
             raise IndexError("Index is out of range in erase operation with index: {}".format(index))
 
@@ -129,10 +132,10 @@ class LinkedList:
 
         self.size -= 1
 
-    def contains(self, key : Any) -> None:
-        for value in self:
-            if value[0] == key:
-                return value[1]
+    def contains(self, key: Any) -> None:
+        for pair in self:
+            if pair[KEY] == key:
+                return pair[VALUE]
         
         return None
 
