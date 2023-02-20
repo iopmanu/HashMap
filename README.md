@@ -11,6 +11,6 @@ HashMap — основан на хэш-таблицах, реализует ин
 
 ![HashMap relation](https://sun9-73.userapi.com/impg/NZig-YpZAHS3UqKZE4uuF5zZK3RTo1FKZTSpHw/IiXBt-E8jjM.jpg?size=807x372&quality=96&sign=ecc7dd0cd07728babc95178539376580&type=album)
 
-| Контейнер    | Search(Best) | Search(Worst) | Insert(Best) | Insert(Worst) | Delete(Best) | Delete(worst)
+| Контейнер    | Search(B) | Search(W) | Insert(B) | Insert(W) | Delete(B) | Delete(W)
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | `Hash Map` | **O(1)** | **O(n)** |  **O(1)** |  **O(n)** | **O(1)** | **O(n)**
