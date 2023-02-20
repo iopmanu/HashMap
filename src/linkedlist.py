@@ -7,10 +7,10 @@ class Node:
     next:  object = None
     prev:  object = None
 
-    def __add__(self, value):
+    def __add__(self, value : Any):
         self.next = Node(value)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return 'node(' + str(self.value) + ')'
 
     def __iter__(self):
@@ -46,7 +46,7 @@ class LinkedList:
         
         self.size += 1
 
-    def insert(self, value, before=None, after=None):
+    def insert(self, value : Any, before=None, after=None) -> None:
         if after is not None:
             if before is not None:
                 raise ValueError('Impossible to insert between 2 nodes')
@@ -64,7 +64,7 @@ class LinkedList:
         self.size += 1
         
 
-    def prepend(self, src):
+    def prepend(self, src : Any) -> None:
         src_node = Node(src, self.head, None)
         if (self.size != 0):
             self.head.prev = src_node
@@ -75,7 +75,7 @@ class LinkedList:
         
         self.size += 1
 
-    def erase(self, index):
+    def erase(self, index : int) -> None:
         if index >= self.size or index < 0:
             raise IndexError("Index is out of range in erase operation with index: {}".format(index))
 
@@ -105,7 +105,7 @@ class LinkedList:
 
         self.size -= 1
 
-    def pop_last(self):
+    def pop_last(self) -> None:
         if self.size == 0:
             raise IndexError("Empty list")
         elif self.size == 1:
@@ -117,7 +117,7 @@ class LinkedList:
 
         self.size -= 1
     
-    def pop_first(self):
+    def pop_first(self) -> None:
         if self.size == 0:
             raise IndexError("Empty list")
         elif self.size == 1:
@@ -126,27 +126,32 @@ class LinkedList:
         else:
             self.head = self.head.next
             self.head.prev = None
-            
+
         self.size -= 1
 
-    def contains(self, key) -> None:
+    def contains(self, key : Any) -> None:
         for value in self:
             if value[0] == key:
                 return value[1]
         
         return None
 
-    def __iter__(self):
+    def clear(self) -> None:
+        self.head = None
+        self.tail = None
+        self.size = 0
+
+    def __iter__(self) -> Any:
         current = self.head
         while current is not None:
             yield current.value
             current = current.next
 
-    def __reversed__(self):
+    def __reversed__(self) -> Any:
         current = self.tail
         while current is not None:
             yield current.value
             current = current.prev
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.size
