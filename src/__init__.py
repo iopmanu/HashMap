@@ -5,5 +5,6 @@ from .hashmap import *
 __all__ = [
     'LinkedList',
     'Node',
-    'DynamicArray'
+    'DynamicArray',
+    'HashMap'
 ]

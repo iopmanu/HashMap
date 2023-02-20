@@ -1,5 +1,5 @@
-from linkedlist import LinkedList
-from dynamic_array import DynamicArray
+from .linkedlist import LinkedList
+from .dynamic_array import DynamicArray
 from typing import Any
 
 INIT_CAPACITY = 11
