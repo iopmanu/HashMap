@@ -49,7 +49,7 @@ class HashMap:
             new_capacity = self._capacity * 2
             self._resize_table(new_capacity)
 
-        elif len(bucket) == 0:
+        if len(bucket) == 0:
             bucket.append([key, value])
         else:
             for pair in bucket:
@@ -57,14 +57,15 @@ class HashMap:
                     pair[VALUE] = value
                     return
             
-            bucket.append((key, value))
+            bucket.append([key, value])
 
         self._size += 1
     
     def contains_key(self, key: Any) -> bool:
         index = (self._hash_function(key)) % self._capacity
+        node = self._buckets[index].contains(key)
 
-        return False if len(self._buckets[index]) == 0 else True
+        return True if node is not None else False
     
     def remove(self, key: Any) -> None:
         index = (self._hash_function(key)) % self._capacity
@@ -118,6 +119,7 @@ class HashMap:
         
         return True
 
+    @classmethod
     def _next_prime(self, capacity: int) -> int:
         if capacity % 2 == 0:
             capacity += 1
