@@ -65,7 +65,7 @@ class HashMap:
         index = (self._hash_function(key)) % self._capacity
         node = self._buckets[index].contains(key)
 
-        return True if node is not None else False
+        return bool(node)
     
     def remove(self, key: Any) -> None:
         index = (self._hash_function(key)) % self._capacity

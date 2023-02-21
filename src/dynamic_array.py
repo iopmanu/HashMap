@@ -3,7 +3,7 @@ from typing import Any
 class DynamicArray:
     
     def __init__(self, arr=None) -> None:
-        self._data = arr.copy() if arr else []
+        self._data = arr.deepcopy() if arr else []
 
     def __str__(self) -> str:
         return str(self._data)
